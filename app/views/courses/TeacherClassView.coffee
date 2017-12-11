@@ -209,6 +209,7 @@ module.exports = class TeacherClassView extends RootView
       else
         @debouncedRender()
     @listenTo @students, 'sort', @debouncedRender
+    @getCourseAssessmentPairs()
     super()
 
   afterRender: ->
@@ -253,6 +254,15 @@ module.exports = class TeacherClassView extends RootView
       progressData
       classStats: @calculateClassStats()
     }
+  
+  getCourseAssessmentPairs: () ->
+    # TODO: Associate with the course somehow so courses helper can be used
+    @courseAssessmentPairs = []
+    for course in @courses.models
+      assessmentLevels = @classroom.getLevels({courseID: course.id, assessmentLevels: true}).models
+      fullLevels = _.filter(@levels.models, (l) => l.get('original') in _.map(assessmentLevels, (l2)=>l2.get('original')))
+      @courseAssessmentPairs.push([course, fullLevels])
+    return @courseAssessmentPairs
 
   onClickNavTabLink: (e) ->
     e.preventDefault()

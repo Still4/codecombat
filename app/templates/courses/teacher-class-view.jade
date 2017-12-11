@@ -153,6 +153,10 @@ block content
             a.course-progress-tab-btn(href='#course-progress-tab')
               .small-details.text-center(data-i18n='teacher.course_progress')
           .tab-spacer
+          li(class=(activeTab === "#assessments-tab" ? 'active' : ''))
+            a.assessments-tab-btn(href='#assessments-tab')
+              .small-details.text-center(data-i18n='teacher.assessments')
+          .tab-spacer
           li(class=(activeTab === "#license-status-tab" ? 'active' : ''))
             a.course-progress-tab-btn(href='#license-status-tab')
               .small-details.text-center(data-i18n='teacher.license_status')
@@ -163,6 +167,8 @@ block content
             +studentsTab
           else if activeTab === '#course-progress-tab'
             +courseProgressTab
+          else if activeTab === '#assessments-tab'
+            +assessmentsTab
           else if activeTab === '#license-status-tab'
             +enrollmentStatusTab
 
@@ -488,6 +494,39 @@ mixin bulkAssignControls
       span(data-i18n='teacher.assign_course')
     button.btn.btn-burgundy-alt.remove-from-selected-students(disabled=!view.allStatsLoaded())
       span(data-i18n='teacher.remove_course')
+
+mixin assessmentsTab
+  #assessments-tab
+    .symbol-key.m-t-3.m-b-3
+      span.glyphicon.glyphicon-ok-sign.success-symbol
+      span(data-i18n='teacher.success')
+      span.glyphicon.glyphicon-question-sign.in-progress-symbol
+      span(data-i18n='teacher.in_progress')
+      span.glyphicon.glyphicon-question-sign.not-started-symbol
+      span(data-i18n='teacher.not_started')
+    table.table.table-condensed.assessments-table
+      if view.classroom && state.get('progressData')
+        thead
+          th
+          each pair in view.courseAssessmentPairs
+            each level in pair[1]
+              - var concept = level.get('concepts') && level.get('concepts')[0]
+              th(data-i18n="concepts." + concept)
+        tbody
+          each student in state.get('students').models
+            tr
+              td.student-name
+                = student.broadName()
+              each pair in view.courseAssessmentPairs
+                each level in pair[1]
+                  td
+                    - var progress = state.get('progressData').get({ classroom: view.classroom, course: pair[0], level: level, user: student })
+                    if progress.completed
+                      span.glyphicon.glyphicon-ok-sign.success-symbol
+                    else if progress.started
+                      span.glyphicon.glyphicon-question-sign.in-progress-symbol
+                    else
+                      span.not-started-symbol
 
 mixin enrollmentStatusTab
   // TODO: Have search input in all tabs

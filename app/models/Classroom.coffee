@@ -92,6 +92,8 @@ module.exports = class Classroom extends CocoModel
       levels.remove(levels.filter((level) -> level.isLadder()))
     if options.projectLevels
       levels.remove(levels.filter((level) -> level.get('shareable') isnt 'project'))
+    if options.assessmentLevels
+      levels.remove(levels.filter((level) -> not level.get('assessment')))
     return levels
 
   getLadderLevel: (courseID) ->

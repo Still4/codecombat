@@ -1560,6 +1560,7 @@
     how_to_apply_licenses_blurb_2: "Can I still apply a license without assigning a course?"
     how_to_apply_licenses_blurb_3: "Yes — go to the License Status tab in your classroom and click \"Apply License\" to any student who does not have an active license."
     request_sent: "Request Sent!"
+    assessments: "Assessments"
     license_status: "License Status"
     status_expired: "Expired on {{date}}"
     status_not_enrolled: "Not Enrolled"
@@ -1727,6 +1728,9 @@
     office_hours_detail: "Learn how to keep up with with your students as they create games and embark on their coding journey! Come and attend our"
     office_hours_link: "Hour of Code Webinar"
     office_hours_detail_2: "sessions."
+    success: "Success"
+    in_progress: "In Progress"
+    not_started: "Not Started"
 
   share_licenses:
     share_licenses: "Share Licenses"
