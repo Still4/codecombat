@@ -207,3 +207,6 @@ module.exports = class Classroom extends CocoModel
       return propInfo[name].default
 
     return false
+  
+  hasAssessments: () ->
+    _.any(@get('courses'), (course) -> _.any(course.levels, { assessment: true }))

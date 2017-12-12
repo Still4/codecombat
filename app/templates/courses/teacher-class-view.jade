@@ -153,10 +153,11 @@ block content
             a.course-progress-tab-btn(href='#course-progress-tab')
               .small-details.text-center(data-i18n='teacher.course_progress')
           .tab-spacer
-          li(class=(activeTab === "#assessments-tab" ? 'active' : ''))
-            a.assessments-tab-btn(href='#assessments-tab')
-              .small-details.text-center(data-i18n='teacher.assessments')
-          .tab-spacer
+          if view.classroom.hasAssessments()
+            li(class=(activeTab === "#assessments-tab" ? 'active' : ''))
+              a.assessments-tab-btn(href='#assessments-tab')
+                .small-details.text-center(data-i18n='teacher.assessments')
+            .tab-spacer
           li(class=(activeTab === "#license-status-tab" ? 'active' : ''))
             a.course-progress-tab-btn(href='#license-status-tab')
               .small-details.text-center(data-i18n='teacher.license_status')

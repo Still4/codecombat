@@ -3,7 +3,9 @@ flat-layout
     p
       a(href="/students", data-i18n="courses.back_courses")
     div.text-center.m-t-2
-      h2(v-if="classroom")
+      h2
+        | {{ $t('courses.assessments') }}
+      h1(v-if="classroom")
         | {{ classroom.name }}
       ul.assessments-list.m-t-3
         li

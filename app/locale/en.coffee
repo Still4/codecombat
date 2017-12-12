@@ -1442,6 +1442,7 @@
     view_assessments: "View Assessments"
     challenge_level: "Challenge Level:"
     status: "Status:"
+    assessments: "Assessments"
 
   project_gallery:
     no_projects_published: "Be the first to publish a project in this course!"

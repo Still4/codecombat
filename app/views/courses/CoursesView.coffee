@@ -115,9 +115,6 @@ module.exports = class CoursesView extends RootView
     levels = versionedCourse.levels
     _.any(levels, { shareable: 'project' })
 
-  classroomHasAssessments: (classroom) ->
-    _.any(classroom.get('courses'), (course) -> _.any(course.levels, { assessment: true }))
-
   onClickLogInButton: ->
     modal = new AuthModal()
     @openModalView(modal)
