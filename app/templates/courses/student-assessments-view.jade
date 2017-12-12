@@ -25,8 +25,8 @@ flat-layout
                 span(v-else)
                   | ({{ level.name }})
             .col-xs-3
-              div.level-status(v-if="sessionMap[level.original]").pull-left
-                span(v-if="sessionMap[level.original].state.complete")
+              div.level-status.pull-left
+                span(v-if="sessionMap[level.original] && sessionMap[level.original].state.complete")
                   span.glyphicon.glyphicon-ok-sign.success-symbol.text-forest
                   | Success
                 span(v-else-if="sessionMap[level.original]")
