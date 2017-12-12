@@ -1440,6 +1440,7 @@
     teacher_dashboard: "teacher dashboard"
     update_old_classroom_detail_2: "and giving students the new Class Code that appears."
     view_assessments: "View Assessments"
+    challenge: "Challenge:"
     challenge_level: "Challenge Level:"
     status: "Status:"
     assessments: "Assessments"

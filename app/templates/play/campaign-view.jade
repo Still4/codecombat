@@ -72,7 +72,9 @@ if showGameDevAlert
         if ((campaign.levelIsPractice(level) || !level.unlockedInSameCampaign) && level.hidden)
           - continue;
         - var levelNumber = '';
-        if view.shouldShow('back-to-classroom') && view.classroom
+        if level.assessment
+          - levelNumber = $.t('courses.challenge') + ' '
+        else if view.shouldShow('back-to-classroom') && view.classroom
           - levelNumber = view.classroom.getLevelNumber(level.original, '');
           if (levelNumber)
             - levelNumber += '. ';

@@ -202,7 +202,7 @@ module.exports = class CampaignView extends RootView
               @courseStats = @classroom.statsForSessions(@courseInstance.sessions, @course.id)
             @courseLevels = new Levels()
             @supermodel.trackRequest @courseLevels.fetchForClassroomAndCourse(classroomID, courseID, {
-              data: { project: 'concepts,practice,primerLanguage,type,slug,name,original,description,shareable,i18n' }
+              data: { project: 'concepts,practice,assessment,primerLanguage,type,slug,name,original,description,shareable,i18n' }
             })
             @listenToOnce @courseLevels, 'sync', =>
               existing = @campaign.get('levels')
