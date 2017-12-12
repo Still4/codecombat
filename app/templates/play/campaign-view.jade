@@ -72,12 +72,13 @@ if showGameDevAlert
         if ((campaign.levelIsPractice(level) || !level.unlockedInSameCampaign) && level.hidden)
           - continue;
         - var levelNumber = '';
-        if level.assessment
-          - levelNumber = $.t('courses.challenge') + ' '
-        else if view.shouldShow('back-to-classroom') && view.classroom
-          - levelNumber = view.classroom.getLevelNumber(level.original, '');
-          if (levelNumber)
-            - levelNumber += '. ';
+        if view.shouldShow('back-to-classroom') && view.classroom
+          if level.assessment
+            - levelNumber = $.t('courses.challenge') + ' '
+          else
+            - levelNumber = view.classroom.getLevelNumber(level.original, '');
+            if (levelNumber)
+              - levelNumber += '. ';
         div(
           style="left: #{level.position.x}%; bottom: #{level.position.y}%; background-color: #{level.color}",
           class="level" + (level.next ? " next" : "") + (level.disabled ? " disabled" : "") + (level.locked ? " locked" : "") + " " + (levelStatusMap[level.slug] || ""),

@@ -464,6 +464,8 @@
     restart: "Restart"
     goals: "Goals"
     goal: "Goal"
+    challenge_level_goals: "Challenge Level Goals"
+    challenge_level_goal: "Challenge Level Goal"
     running: "Running..."
     success: "Success!"
     incomplete: "Incomplete"
