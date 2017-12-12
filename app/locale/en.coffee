@@ -1439,6 +1439,9 @@
     update_old_classroom_detail: "To make sure you're getting the most up-to-date levels, make sure you create a new class for this semester by clicking Create a New Class on your"
     teacher_dashboard: "teacher dashboard"
     update_old_classroom_detail_2: "and giving students the new Class Code that appears."
+    view_assessments: "View Assessments"
+    challenge_level: "Challenge Level:"
+    status: "Status:"
 
   project_gallery:
     no_projects_published: "Be the first to publish a project in this course!"

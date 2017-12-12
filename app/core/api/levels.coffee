@@ -1,8 +1,8 @@
 fetchJson = require './fetch-json'
 
 module.exports = {
-  getByOriginal: (original) ->
-    return fetchJson("/db/level/#{original}/version")
+  getByOriginal: (original, options={}) ->
+    return fetchJson("/db/level/#{original}/version", _.merge({}, options))
   
   fetchNextForCourse: ({ levelOriginalID, courseInstanceID, courseID, sessionID }, options={}) ->
     if courseInstanceID
