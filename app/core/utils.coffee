@@ -476,6 +476,8 @@ createLevelNumberMap = (levels) ->
       levelNumber = i - practiceLevelTotalCount + String.fromCharCode('a'.charCodeAt(0) + practiceLevelCurrentCount)
       practiceLevelTotalCount++
       practiceLevelCurrentCount++
+    else if level.assessment
+      levelNumber = null # TODO: Do we want something for this?
     else
       practiceLevelCurrentCount = 0
     levelNumberMap[level.key] = levelNumber
@@ -524,7 +526,6 @@ findNextAssessmentForLevel = (levels, currentIndex) ->
       index++
     else # we got to a normal level; we didn't find an assessment for the given level.
       return false
-    index++ # it's a practice level
   return false # we got to the end of the list and found nothing
 
 needsPractice = (playtime=0, threshold=5) ->
