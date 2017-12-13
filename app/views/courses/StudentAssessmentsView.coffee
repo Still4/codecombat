@@ -22,6 +22,7 @@ StudentAssessmentsComponent = Vue.extend
     levels: null
     sessionMap: {}
     playLevelUrlMap: {}
+    levelUnlockedMap: {}
   computed:
     backToClassroomUrl: -> "/teachers/classes/#{@classroom?._id}"
   created: ->
@@ -31,6 +32,7 @@ StudentAssessmentsComponent = Vue.extend
       Promise.all([
         # TODO: Only load the levels we actually need
         api.classrooms.get({ @classroomID }, { data: {memberID: me.id}, cache: false }).then((@classroom) =>
+          @allLevels = _.flatten(_.map(@classroom.courses, (course) => course.levels))
           @levels = _.flatten(_.map(@classroom.courses, (course) => _.filter(course.levels, { assessment: true })))
           @courses = @classroom.courses
         ).then =>
@@ -42,12 +44,7 @@ StudentAssessmentsComponent = Vue.extend
               Vue.set(levelToUpdate, 'concepts', data.concepts)
           )
       ]).then => Promise.all([
-        api.users.getLevelSessions({ userID: me.id }).then((levelSessions) =>
-          # TODO: Only load the sessions we actually need
-          @levelSessions = _.filter(levelSessions, (session) =>
-            return Boolean(_.find(@levels, {original: session.level.original}))
-          )
-        )
+        api.users.getLevelSessions({ userID: me.id }).then((@levelSessions) =>)
       ])
     ]).then =>
       @sessionMap =
@@ -65,6 +62,22 @@ StudentAssessmentsComponent = Vue.extend
             map[level.original] = "/play/level/#{level.slug}?course-instance=#{courseInstance?._id}&course=#{course?._id}"
           return map
         , {})
+      # These two maps are for determining if a challenge is unlocked yet
+      @previousLevelMap = (=>
+        map = {}
+        for level, index in @allLevels
+          assessmentIndex = utils.findNextAssessmentForLevel(@allLevels, index)
+          if assessmentIndex isnt false
+            assessmentOriginal = @allLevels[assessmentIndex].original
+            map[assessmentOriginal] ?= level.original
+        return map
+      )()
+      @levelUnlockedMap = (=>
+        map = {}
+        for level, index in @levels
+          map[level.original] = @sessionMap[@previousLevelMap[level.original]]?.state.complete or false
+        return map
+      )()
   methods:
     getPlayLevelUrl: (level) ->
       # TODO:

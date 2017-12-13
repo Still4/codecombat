@@ -36,10 +36,13 @@ flat-layout
                   span.glyphicon.glyphicon-question-sign.not-started-symbol.text-gray
                   | Not Started
             .col-xs-2
-              div(v-if="playLevelUrlMap[level.original]")
+              div(v-if="levelUnlockedMap[level.original] && playLevelUrlMap[level.original]")
                 a.play-level-btn.btn.btn-lg.btn-gray(v-if="sessionMap[level.original] && sessionMap[level.original].state.complete", :href="playLevelUrlMap[level.original]")
                   | Play Again
                 a.play-level-btn.btn.btn-lg.btn-forest(v-else-if="sessionMap[level.original]", :href="playLevelUrlMap[level.original]")
                   | Keep Trying
                 a.play-level-btn.btn.btn-lg.btn-navy(v-else, :href="playLevelUrlMap[level.original]")
                   | Start Challenge
+              div(v-else)
+                a.btn.btn-lg.btn-gray-alt(disabled)
+                  | Locked
