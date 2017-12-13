@@ -477,7 +477,9 @@ createLevelNumberMap = (levels) ->
       practiceLevelTotalCount++
       practiceLevelCurrentCount++
     else if level.assessment
-      levelNumber = null # TODO: Do we want something for this?
+      practiceLevelTotalCount++
+      practiceLevelCurrentCount++
+      levelNumber = 'Challenge'
     else
       practiceLevelCurrentCount = 0
     levelNumberMap[level.key] = levelNumber

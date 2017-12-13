@@ -61,11 +61,14 @@ block content
                         each level, levelIndex in campaign.getLevels().models
                           - var levelNumber = campaign.getLevelNumber(level.get('original'), levelIndex + 1)
                           option(value=level.get('slug'))
-                            span
-                              = levelNumber
-                            span.spr
-                              | .
-                            = " "
+                            if (/challenge/i).test(levelNumber)
+                              =$.t('courses.challenge') + ' '
+                            else
+                              span
+                                = levelNumber
+                              span.spr
+                                | .
+                              = " "
                             span
                               = i18n(level.attributes, 'name').replace('Course: ', '')
               a.play-level-button.btn.btn-lg.btn-primary
